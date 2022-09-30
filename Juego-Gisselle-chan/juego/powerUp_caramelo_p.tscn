@@ -1,0 +1,54 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle4.png" type="Texture" id=1]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle6.png" type="Texture" id=2]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle5.png" type="Texture" id=3]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle0.png" type="Texture" id=6]
+[ext_resource path="res://Assets/caramelito/caramelito_movement/caramelo_idle3.png" type="Texture" id=7]
+[ext_resource path="res://juego/powerUp_caramelo_p.gd" type="Script" id=8]
+[ext_resource path="res://Assets/caramelito/caramelito3.png" type="Texture" id=9]
+[ext_resource path="res://Assets/caramelito/caramelito0.png" type="Texture" id=10]
+[ext_resource path="res://Assets/caramelito/caramelito4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/caramelito/caramelito1.png" type="Texture" id=12]
+[ext_resource path="res://Assets/caramelito/caramelito2.png" type="Texture" id=13]
+[ext_resource path="res://sonidos_y_musica/sonidos/wrap_sound.mp3" type="AudioStream" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "collect",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "candy",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 29.0
+
+[node name="powerup_caramelo" type="Node2D"]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="caramelo" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "candy"
+frame = 9
+playing = true
+
+[node name="Area2D" type="Area2D" parent="caramelo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="caramelo/Area2D"]
+shape = SubResource( 2 )
+
+[node name="collect_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[connection signal="body_entered" from="caramelo/Area2D" to="." method="_on_Area2D_body_entered"]

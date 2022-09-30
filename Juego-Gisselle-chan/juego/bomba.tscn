@@ -1,0 +1,73 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/bomba/bomba_2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/bomba/bomba_0.png" type="Texture" id=2]
+[ext_resource path="res://Assets/bomba/bomba_4.png" type="Texture" id=3]
+[ext_resource path="res://Assets/bomba/bomba_1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/bomba/bomba_3.png" type="Texture" id=5]
+[ext_resource path="res://juego/bomba.gd" type="Script" id=6]
+[ext_resource path="res://Assets/explosiones.png" type="Texture" id=7]
+[ext_resource path="res://sonidos_y_musica/sonidos/8 bit explosion sound effect SFX.mp3" type="AudioStream" id=8]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 192, 0, 48, 65 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 427, 0, 61, 65 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 650, 0, 65, 91 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), null ],
+"loop": false,
+"name": "exploted",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "droped",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "falling",
+"speed": 3.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 15.0333
+
+[node name="bomba" type="Node2D"]
+
+[node name="bomba" type="KinematicBody2D" parent="."]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="bomba"]
+frames = SubResource( 1 )
+animation = "droped"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bomba"]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="bomba"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bomba/Area2D"]
+position = Vector2( 0, 4 )
+shape = SubResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="bomba"]
+stream = ExtResource( 8 )
+
+[connection signal="body_entered" from="bomba/Area2D" to="bomba" method="_on_Area2D_body_entered"]

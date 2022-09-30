@@ -1,0 +1,114 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://enemigos/robot_patrulla/robot0.png" type="Texture" id=1]
+[ext_resource path="res://enemigos/robot_patrulla/robot3.png" type="Texture" id=2]
+[ext_resource path="res://enemigos/robot_patrulla/robot5.png" type="Texture" id=3]
+[ext_resource path="res://enemigos/robot_patrulla/robot4.png" type="Texture" id=4]
+[ext_resource path="res://enemigos/robot_patrulla/robot1.png" type="Texture" id=5]
+[ext_resource path="res://robot_escudo.gd" type="Script" id=6]
+[ext_resource path="res://enemigos/robot_patrulla/robotdestruccion1.png" type="Texture" id=9]
+[ext_resource path="res://enemigos/robot_patrulla/robotdestruccion4.png" type="Texture" id=10]
+[ext_resource path="res://enemigos/robot_patrulla/robotdestruccion2.png" type="Texture" id=11]
+[ext_resource path="res://enemigos/robot_patrulla/robotdestruccion3.png" type="Texture" id=12]
+[ext_resource path="res://sonidos_y_musica/sonidos/metal_chirreando.mp3" type="AudioStream" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "die",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "vuelta",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.5, 14.75 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 2.5, 15 )
+
+[node name="robot_escudo" type="Node2D"]
+position = Vector2( 0, -3 )
+
+[node name="robot_escudo" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="robot_escudo"]
+position = Vector2( -5, 0 )
+frames = SubResource( 1 )
+animation = "walk"
+frame = 3
+
+[node name="escudo" type="CollisionShape2D" parent="robot_escudo"]
+position = Vector2( -8, 3.75 )
+shape = SubResource( 3 )
+
+[node name="cuerpo" type="CollisionShape2D" parent="robot_escudo"]
+position = Vector2( 1, 9 )
+shape = SubResource( 2 )
+
+[node name="damagebox" type="Area2D" parent="robot_escudo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="robot_escudo/damagebox"]
+shape = SubResource( 4 )
+
+[node name="floor_detection" type="RayCast2D" parent="robot_escudo"]
+position = Vector2( -45, 0 )
+enabled = true
+cast_to = Vector2( 0, 25 )
+
+[node name="floor_detection2" type="RayCast2D" parent="robot_escudo"]
+position = Vector2( 45, 0 )
+enabled = true
+cast_to = Vector2( 0, 25 )
+
+[node name="derecha" type="RayCast2D" parent="robot_escudo"]
+position = Vector2( 0, 13 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 30, 0 )
+
+[node name="izquierda" type="RayCast2D" parent="robot_escudo"]
+position = Vector2( 0, 13 )
+enabled = true
+cast_to = Vector2( -30, 0 )
+
+[node name="Label" type="Label" parent="robot_escudo"]
+margin_left = -12.0
+margin_top = -31.0
+margin_right = 41.0
+margin_bottom = -17.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "100/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lastimar" type="Area2D" parent="robot_escudo"]
+
+[node name="lastimar" type="CollisionShape2D" parent="robot_escudo/lastimar"]
+position = Vector2( -16, 5 )
+shape = SubResource( 6 )
+
+[node name="destruido" type="AudioStreamPlayer" parent="robot_escudo"]
+stream = ExtResource( 13 )
+
+[connection signal="body_entered" from="robot_escudo/damagebox" to="robot_escudo" method="_on_damagebox_body_entered"]
+[connection signal="body_entered" from="robot_escudo/lastimar" to="robot_escudo" method="_on_lastimar_body_entered"]

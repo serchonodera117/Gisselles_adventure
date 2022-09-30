@@ -1,0 +1,152 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Niveles/suelos_plataformas.tres" type="TileSet" id=1]
+[ext_resource path="res://Assets/anxiety_monster.png" type="Texture" id=2]
+[ext_resource path="res://enemigos/jefe_1/jefe_1.gd" type="Script" id=3]
+[ext_resource path="res://enemigos/jefe_1/jefe_defending.png" type="Texture" id=4]
+[ext_resource path="res://Assets/simbolo-infinito.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "defending",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 14.0
+
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 60.25, 3.5 )
+
+[node name="jefe_1" type="Node2D"]
+
+[node name="jefe_1" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="jefe_1"]
+position = Vector2( 3, 0 )
+scale = Vector2( 0.1, 0.1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( -9, 536870912, 0, -6, 1610612745, 0, 65523, 536870912, 0, 65530, 1610612745, 0, 131064, 1610612745, 0, 131065, 1610612745, 0, 131066, 1610612745, 0, 196596, 1610612745, 0, 196597, 1610612745, 0, 196598, 1610612745, 0, 196599, 1610612745, 0, 196600, 1610612745, 0, 262129, 536870912, 0, 262130, 1610612736, 0, 262131, 1610612745, 0, 262132, 1610612745, 0, 262138, 1610612736, 0, 327667, 1610612745, 0, 327668, 536870922, 0, 393202, 536870922, 0, 393203, 1610612745, 0, 524274, 536870922, 0, 589808, 536870922, 0 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="jefe_1"]
+frames = SubResource( 10 )
+frame = 4
+playing = true
+
+[node name="TileMap2" type="TileMap" parent="jefe_1"]
+scale = Vector2( 0.1, 0.1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 524270, 536870922, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jefe_1"]
+position = Vector2( -2, 2 )
+shape = SubResource( 11 )
+
+[node name="Timer" type="Timer" parent="jefe_1"]
+
+[node name="jump_wall" type="RayCast2D" parent="jefe_1"]
+position = Vector2( 2, 14 )
+enabled = true
+cast_to = Vector2( 16, 0 )
+
+[node name="jump_wall2" type="RayCast2D" parent="jefe_1"]
+position = Vector2( 2, 14 )
+enabled = true
+cast_to = Vector2( -23, 0 )
+
+[node name="Area2D" type="Area2D" parent="jefe_1"]
+position = Vector2( -26, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jefe_1/Area2D"]
+position = Vector2( 39, 2 )
+shape = SubResource( 12 )
+
+[node name="detection_right" type="Area2D" parent="jefe_1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jefe_1/detection_right"]
+position = Vector2( 57.75, 14 )
+shape = SubResource( 13 )
+
+[node name="detection_left" type="Area2D" parent="jefe_1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jefe_1/detection_left"]
+position = Vector2( -65, 14 )
+shape = SubResource( 13 )
+
+[node name="ProgressBar" type="ProgressBar" parent="jefe_1"]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
+margin_left = -16.0
+margin_top = -18.0
+margin_right = 16.0
+margin_bottom = -4.0
+rect_scale = Vector2( 1, 0.2 )
+custom_colors/font_color = Color( 0, 0.227451, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.0392157, 0.0392157, 1 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="jefe_1"]
+position = Vector2( 0, -16.6 )
+scale = Vector2( 0.0170898, 0.00610351 )
+texture = ExtResource( 5 )
+
+[connection signal="body_entered" from="jefe_1/Area2D" to="jefe_1" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="jefe_1/detection_right" to="jefe_1" method="_on_detection_right_body_entered"]
+[connection signal="body_entered" from="jefe_1/detection_left" to="jefe_1" method="_on_detection_left_body_entered"]

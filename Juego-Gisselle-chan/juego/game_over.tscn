@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sonidos_y_musica/Nathan-Larson-Avival-Pastoral-Chiptune-Cover.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/mapa_casa_interiores/700x511_SliderInterior.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Niveles/sadness.PNG" type="Texture" id=3]
+[ext_resource path="res://juego/game_over.gd" type="Script" id=4]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://juego/caja_dialogos.tscn" type="PackedScene" id=6]
+[ext_resource path="res://juego/fondo.tres" type="TileSet" id=7]
+
+[sub_resource type="TileSet" id=2]
+0/name = "700x511_SliderInterior.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 375, 138, 36, 33 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 10
+font_data = ExtResource( 5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="fondo" type="TileMap" parent="."]
+scale = Vector2( 10, 10 )
+tile_set = ExtResource( 7 )
+cell_quadrant_size = 1
+format = 1
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, 65535, 0, 0, 0, 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="fondo"]
+position = Vector2( 52.5, 32.5 )
+scale = Vector2( 0.108205, 0.0929422 )
+texture = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="fondo"]
+scale = Vector2( 0.5, 0.5 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 10, 10 )
+format = 1
+tile_data = PoolIntArray( -131065, 0, 0, -65523, 0, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 0.72549, 0.635294, 0.984314, 1 )
+position = Vector2( 450, 408 )
+amount = 6
+lifetime = 7.0
+process_material = SubResource( 3 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+modulate = Color( 0.72549, 0.635294, 0.984314, 1 )
+position = Vector2( 616, 384 )
+lifetime = 7.0
+process_material = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 765.0
+margin_top = 109.0
+margin_right = 983.0
+margin_bottom = 171.0
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+visible_characters = 52
+meta_underlined = false
+tab_size = 1
+text = "G A M E   O V E R "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
+
+[node name="salir" type="Button" parent="."]
+margin_left = 186.0
+margin_top = 52.0
+margin_right = 320.0
+margin_bottom = 87.0
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.0941176, 0.0941176, 1 )
+custom_colors/font_color_pressed = Color( 0.223529, 0.207843, 0.207843, 1 )
+custom_fonts/font = SubResource( 5 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="caja_dialogos" parent="." instance=ExtResource( 6 )]
+modulate = Color( 1, 1, 1, 0.745098 )
+margin_left = 543.0
+margin_top = 598.0
+margin_right = 543.0
+margin_bottom = 598.0
+
+[connection signal="pressed" from="salir" to="." method="_on_salir_pressed"]

@@ -1,0 +1,298 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Mapa_Ciudad/mapa_ciudad.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sonidos_y_musica/city_map_music-8Bit_Cover_Song_of_the_Ancients_Devola_ver_122474487139.mp3" type="AudioStream" id=2]
+[ext_resource path="res://sonidos_y_musica/sonidos/metal_chirreando.mp3" type="AudioStream" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var minMap=preload(\"res://minimapa/minimapa.tscn\")
+var mm
+
+func _ready():
+	set_mm()
+	$AudioStreamPlayer.volume_db = Global.volumen_musica
+	Global.escena_player= \"res://juego/juego.tscn\"
+func _process(delta):
+	$AudioStreamPlayer.volume_db = Global.volumen_musica
+	if(!$mapa_ciudad.reproduce_musica):
+		$AudioStreamPlayer.stop()
+
+	
+
+func set_mm():
+	mm=minMap.instance()
+	$mapa_ciudad/suelo/Caminos_tierra/player/Camera2D.add_child(mm)
+	mm.position=Vector2(-480,-275)
+
+func _on_entrada_barrioG_body_entered(body):
+	 if(body.get_name() == \"player\"):
+			Global.ubicacion_j1 = \"Region Kanto\"
+
+
+
+func _on_ciudadA_entrada_body_entered(body):
+	if(body.get_name() == \"player\"):
+		 Global.ubicacion_j1 = \"Ciudad A\"
+
+
+func _on_entrada_islanorte_body_entered(body):
+	if(body.get_name() == \"player\"):
+		 Global.ubicacion_j1 = \"North Yankton\"
+
+
+
+func _on_enrtada_ciudadB_body_exited(body):
+	if(body.get_name() == \"player\"):
+		Global.ubicacion_j1 = \"Ciudad B\"
+
+
+
+
+func _on_puente_estropeado_body_entered(body):
+	#AudioServer.set_bus_layout(load(myBus))
+	if(body.get_name()==\"player\"):
+		$mapa_ciudad/suelo/Caminos_tierra/player/Animacion_nervios.reproducir()
+		AudioServer.add_bus_effect(0, AudioEffectLowPassFilter.new(), 1)
+		AudioServer.add_bus_effect(0, AudioEffectReverb.new(), 1)
+	$metal_chirreando.play()
+	
+	
+	
+
+
+func _on_puente_estropeado_body_exited(body):
+	if(body.get_name()==\"player\"):
+		$mapa_ciudad/suelo/Caminos_tierra/player/Animacion_nervios.reproducir_alreves()
+		AudioServer.remove_bus_effect(0, 1)
+		AudioServer.remove_bus_effect(0, 1)
+	$metal_chirreando.stop()
+	
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 65, 14.25 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 62, 33 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 11, 39.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 15.25, 42.25 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 169, 33.5 )
+
+[node name="juego" type="Node2D"]
+pause_mode = 1
+script = SubResource( 1 )
+
+[node name="mapa_ciudad" parent="." instance=ExtResource( 1 )]
+position = Vector2( 61, 260 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
+stream = ExtResource( 2 )
+volume_db = -12.363
+autoplay = true
+
+[node name="entrada_barrioG" type="Area2D" parent="."]
+position = Vector2( 374, 544 )
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada_barrioG"]
+modulate = Color( 0.623529, 0.333333, 0.333333, 1 )
+position = Vector2( 108, 884 )
+shape = SubResource( 2 )
+
+[node name="entrada_barrioG2" type="Area2D" parent="."]
+position = Vector2( 374, 544 )
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada_barrioG2"]
+modulate = Color( 0.623529, 0.333333, 0.333333, 1 )
+position = Vector2( 818, 889 )
+shape = SubResource( 2 )
+
+[node name="entrada_barrioG3" type="Area2D" parent="."]
+position = Vector2( 423, 851 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada_barrioG3"]
+modulate = Color( 0.623529, 0.333333, 0.333333, 1 )
+position = Vector2( 1483, 678 )
+shape = SubResource( 2 )
+
+[node name="ciudadA_entrada" type="Area2D" parent="."]
+position = Vector2( 423, 1550 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ciudadA_entrada"]
+position = Vector2( 59, 0 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada2" type="Area2D" parent="."]
+position = Vector2( 1128, 1522 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ciudadA_entrada2"]
+position = Vector2( 59, 0 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada3" type="Area2D" parent="."]
+position = Vector2( 1973, 1709 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ciudadA_entrada3"]
+position = Vector2( 29, 79 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada4" type="Area2D" parent="."]
+position = Vector2( 2380, 762 )
+z_index = 1
+
+[node name="CollisionShape2D-" type="CollisionShape2D" parent="ciudadA_entrada4"]
+position = Vector2( 159, 295 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada5" type="Area2D" parent="."]
+position = Vector2( 2380, 762 )
+z_index = 1
+
+[node name="CollisionShape2D-" type="CollisionShape2D" parent="ciudadA_entrada5"]
+position = Vector2( 434, 1252 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada6" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 2380, 762 )
+z_index = 1
+
+[node name="CollisionShape2D-" type="CollisionShape2D" parent="ciudadA_entrada6"]
+position = Vector2( 623, 2040 )
+shape = SubResource( 3 )
+
+[node name="ciudadA_entrada7" type="Area2D" parent="."]
+position = Vector2( 2380, 762 )
+z_index = 1
+
+[node name="CollisionShape2D-" type="CollisionShape2D" parent="ciudadA_entrada7"]
+position = Vector2( -90, 3127 )
+shape = SubResource( 3 )
+
+[node name="entrada_islanorte" type="Area2D" parent="."]
+position = Vector2( 3208, 1077 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada_islanorte"]
+position = Vector2( 1, -20.5 )
+z_index = 1
+shape = SubResource( 4 )
+
+[node name="entrada_islanorte2" type="Area2D" parent="."]
+position = Vector2( 3800, 642 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada_islanorte2"]
+position = Vector2( 1, -20.5 )
+z_index = 1
+shape = SubResource( 4 )
+
+[node name="enrtada_ciudadB" type="Area2D" parent="."]
+position = Vector2( 4196, 623 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enrtada_ciudadB"]
+position = Vector2( 6.25, -18.25 )
+shape = SubResource( 5 )
+
+[node name="enrtada_ciudadB2" type="Area2D" parent="."]
+position = Vector2( 3341, 2032 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enrtada_ciudadB2"]
+position = Vector2( 6.25, -18.25 )
+shape = SubResource( 5 )
+
+[node name="enrtada_ciudadB3" type="Area2D" parent="."]
+position = Vector2( 3413, 2820 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enrtada_ciudadB3"]
+position = Vector2( 6.25, -18.25 )
+shape = SubResource( 5 )
+
+[node name="enrtada_ciudadB4" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 2728, 3900 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enrtada_ciudadB4"]
+position = Vector2( 6.25, -4.75 )
+shape = SubResource( 5 )
+
+[node name="puente_estropeado" type="Area2D" parent="."]
+position = Vector2( 2380, 3865 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="puente_estropeado"]
+modulate = Color( 0.376471, 0.0156863, 0.0156863, 1 )
+position = Vector2( 159, 23.5 )
+shape = SubResource( 6 )
+
+[node name="metal_chirreando" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 3 )
+
+[connection signal="body_entered" from="entrada_barrioG" to="." method="_on_entrada_barrioG_body_entered"]
+[connection signal="body_entered" from="entrada_barrioG2" to="." method="_on_entrada_barrioG_body_entered"]
+[connection signal="body_entered" from="entrada_barrioG3" to="." method="_on_entrada_barrioG_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada2" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada3" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada4" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada5" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada6" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="ciudadA_entrada7" to="." method="_on_ciudadA_entrada_body_entered"]
+[connection signal="body_entered" from="entrada_islanorte" to="." method="_on_entrada_islanorte_body_entered"]
+[connection signal="body_entered" from="entrada_islanorte2" to="." method="_on_entrada_islanorte_body_entered"]
+[connection signal="body_exited" from="enrtada_ciudadB" to="." method="_on_enrtada_ciudadB_body_exited"]
+[connection signal="body_exited" from="enrtada_ciudadB2" to="." method="_on_enrtada_ciudadB_body_exited"]
+[connection signal="body_exited" from="enrtada_ciudadB3" to="." method="_on_enrtada_ciudadB_body_exited"]
+[connection signal="body_exited" from="enrtada_ciudadB4" to="." method="_on_enrtada_ciudadB_body_exited"]
+[connection signal="body_entered" from="puente_estropeado" to="." method="_on_puente_estropeado_body_entered"]
+[connection signal="body_exited" from="puente_estropeado" to="." method="_on_puente_estropeado_body_exited"]

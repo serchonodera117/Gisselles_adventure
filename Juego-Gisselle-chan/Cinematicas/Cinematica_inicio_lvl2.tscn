@@ -1,0 +1,163 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Assets/Escenarios_cinematicas/clase_inicio.png" type="Texture" id=1]
+[ext_resource path="res://juego/fondo.tres" type="TileSet" id=2]
+[ext_resource path="res://juego/caja_dialogos.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Cinematicas/Cinematica_inicio_lvl2.gd" type="Script" id=4]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_inicio_anciedad.png" type="Texture" id=5]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_manos_regazo.png" type="Texture" id=6]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_basic_model.png" type="Texture" id=7]
+[ext_resource path="res://sonidos_y_musica/lvl2dark-piano-schizophrenia.mp3" type="AudioStream" id=8]
+[ext_resource path="res://sonidos_y_musica/sonidos/sonido_latidos.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_apunto_llorar.png" type="Texture" id=10]
+[ext_resource path="res://sonidos_y_musica/sonidos/respiracion_agitada.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_crying.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Escenarios_cinematicas/reflector.png" type="Texture" id=13]
+[ext_resource path="res://sonidos_y_musica/sonidos/sonido_proyector.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Assets/personajes/Gisselle_Braun_Von_Degurechaff/G_crying_red.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+
+[sub_resource type="Animation" id=2]
+resource_name = "mostrar_clase1"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "g-inicio-crying",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "g-crying",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "g-basic",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "g-inicio-a",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "g-regazo",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "g-red-crying",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show_gisselle"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Cinematica_inicio_lvl2" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="fondo" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -131061, 0, 0, -131060, 0, 0, -131059, 0, 0, -131058, 0, 0, -131057, 0, 0, -131056, 0, 0, -3, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, 0, 0, 0, 131069, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 262141, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 655357, 0, 0, 655358, 0, 0, 655359, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0 )
+
+[node name="inicio_aula" type="TextureRect" parent="fondo"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 1034.0
+margin_bottom = 606.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fondo/inicio_aula"]
+anims/RESET = SubResource( 1 )
+anims/mostrar_clase1 = SubResource( 2 )
+
+[node name="gisselle" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 538, 424 )
+scale = Vector2( 0.390316, 0.368954 )
+frames = SubResource( 3 )
+animation = "g-regazo"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="gisselle"]
+anims/RESET = SubResource( 5 )
+anims/show_gisselle = SubResource( 4 )
+
+[node name="reflector" type="TextureRect" parent="."]
+visible = false
+margin_left = -6.10352e-05
+margin_right = 39.9999
+margin_bottom = 40.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="caja_dialogos" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0.741176 )
+margin_left = 503.0
+margin_top = 581.0
+margin_right = 503.032
+margin_bottom = 581.0
+
+[node name="bg_theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="latidos" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="nervous" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="proyector" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )

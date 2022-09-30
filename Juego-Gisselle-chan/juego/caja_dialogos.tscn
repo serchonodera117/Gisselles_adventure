@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/dialog_text.png" type="Texture" id=1]
+[ext_resource path="res://Assets/boton_caja_texto00.png" type="Texture" id=2]
+[ext_resource path="res://juego/Control.gd" type="Script" id=3]
+[ext_resource path="res://Assets/boton_dialogo.png" type="Texture" id=4]
+[ext_resource path="res://juego/caja_dialogos.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ NodePath("..") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 42, 47 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 556, 91 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "boton_texto"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 556, 97 ), Vector2( 556, 83 ) ]
+}
+
+[node name="caja_dialogos" type="Control"]
+anchor_right = 0.582
+anchor_bottom = 0.438
+margin_right = 0.0319824
+margin_bottom = -90.8
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+anchor_left = 0.494
+anchor_top = 1.0
+anchor_right = 0.494
+anchor_bottom = 1.0
+margin_left = -293.856
+margin_top = -157.0
+margin_right = 319.144
+margin_bottom = -13.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="contenedor_texto" type="TextureRect" parent="Control"]
+anchor_right = 0.87
+anchor_bottom = 1.0
+margin_right = 69.47
+margin_bottom = 2.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 37.0
+margin_top = 21.0
+margin_right = -134.0
+margin_bottom = -41.0
+rect_scale = Vector2( 1.2, 1.2 )
+bbcode_enabled = true
+bbcode_text = "[color=#FACDBE]Gisselle: [/color]caigo y caigo, y caigo aún más, días pasados de gloria, dias venideros de drrota"
+text = "Gisselle: caigo y caigo, y caigo aún más, días pasados de gloria, dias venideros de drrota"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Control"]
+
+[node name="boton_texto" type="TextureButton" parent="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 556.0
+margin_top = 91.0
+margin_right = 598.0
+margin_bottom = 138.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/boton_texto"]
+autoplay = "boton_texto"
+anims/RESET = SubResource( 1 )
+anims/boton_texto = SubResource( 2 )
+
+[connection signal="tween_all_completed" from="Control/Tween" to="Control" method="_on_Tween_tween_all_completed"]
+[connection signal="pressed" from="Control/boton_texto" to="Control" method="_on_boton_texto_pressed"]

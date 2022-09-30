@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/boton_dialogo.png" type="Texture" id=1]
+[ext_resource path="res://Assets/pausa_icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/disparo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/map_icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/boton_caja_texto00.png" type="Texture" id=5]
+
+[node name="Control_tactil" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 402.0
+margin_right = -15.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="b_derecha" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 0.321569, 0.321569, 1 )
+position = Vector2( 154, 128 )
+rotation = -1.5708
+scale = Vector2( 3, 3 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 5 )
+action = "mover_derecha"
+visibility_mode = 1
+
+[node name="b_izquierda" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 0.321569, 0.321569, 1 )
+position = Vector2( 104, 31 )
+rotation = 1.5708
+scale = Vector2( 3, 3 )
+z_index = 100
+normal = ExtResource( 1 )
+pressed = ExtResource( 5 )
+action = "mover_izquierda"
+visibility_mode = 1
+
+[node name="b_arriba" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 0.321569, 0.321569, 1 )
+position = Vector2( 176, 61 )
+rotation = 3.14159
+scale = Vector2( 3, 3 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 5 )
+action = "mover_arriba"
+visibility_mode = 1
+
+[node name="b_abajo" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 0.321569, 0.321569, 1 )
+position = Vector2( 81, 109 )
+scale = Vector2( 3, 3 )
+z_index = 100
+normal = ExtResource( 1 )
+pressed = ExtResource( 5 )
+action = "mover_abajo"
+visibility_mode = 1
+
+[node name="salto" type="TouchScreenButton" parent="."]
+modulate = Color( 0.694118, 0.713726, 0.847059, 1 )
+position = Vector2( 1006, 190 )
+rotation = 3.14159
+scale = Vector2( 4.21737, 2.98326 )
+z_index = 100
+normal = ExtResource( 1 )
+pressed = ExtResource( 5 )
+action = "mover_salto"
+visibility_mode = 1
+
+[node name="Pausa" type="TouchScreenButton" parent="."]
+modulate = Color( 0.905882, 0.843137, 0.843137, 0.705882 )
+position = Vector2( 652.825, 168 )
+rotation = 3.14159
+scale = Vector2( 0.0506391, 0.0459146 )
+z_index = 100
+normal = ExtResource( 2 )
+pressed = ExtResource( 5 )
+action = "pausar"
+visibility_mode = 1
+
+[node name="disparar" type="TouchScreenButton" parent="."]
+modulate = Color( 0.917647, 0.603922, 0.603922, 1 )
+position = Vector2( 712, 0 )
+scale = Vector2( 3, 3 )
+z_index = 100
+normal = ExtResource( 3 )
+pressed = ExtResource( 5 )
+action = "ataque"
+visibility_mode = 1
+
+[node name="acciones_mapa" type="TouchScreenButton" parent="."]
+position = Vector2( 369, 96 )
+scale = Vector2( 0.146484, 0.140625 )
+z_index = 100
+normal = ExtResource( 4 )
+pressed = ExtResource( 5 )
+action = "mapa"
+visibility_mode = 1
