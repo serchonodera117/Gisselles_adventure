@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://npc/sprites/girls_casual_clothes_2___sprite_mv_by_karmenis_de0ijyk.png" type="Texture" id=1]
+[ext_resource path="res://npc/npc_yoyo.gd" type="Script" id=2]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 288, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 336, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 288, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 336, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 336, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 336, 336, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 3 ) ],
+"loop": true,
+"name": "move_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 6 ) ],
+"loop": true,
+"name": "move_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=10]
+height = 50.0
+
+[sub_resource type="CircleShape2D" id=11]
+
+[sub_resource type="DynamicFont" id=12]
+size = 7
+font_data = ExtResource( 3 )
+
+[node name="npc_yoyo" type="Node2D"]
+
+[node name="npc_yoyo" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="npc_yoyo"]
+frames = SubResource( 1 )
+animation = "idle_down"
+playing = true
+
+[node name="Area2D" type="Area2D" parent="npc_yoyo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_yoyo/Area2D"]
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_yoyo"]
+position = Vector2( 0, 16 )
+shape = SubResource( 11 )
+
+[node name="down_detection" type="RayCast2D" parent="npc_yoyo"]
+enabled = true
+
+[node name="up_detection" type="RayCast2D" parent="npc_yoyo"]
+enabled = true
+cast_to = Vector2( 0, -50 )
+
+[node name="Label" type="Label" parent="npc_yoyo"]
+margin_left = -16.0
+margin_top = -37.0
+margin_right = 24.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 12 )
+text = "70pts
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="npc_yoyo/Area2D" to="npc_yoyo" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="npc_yoyo/Area2D" to="npc_yoyo" method="_on_Area2D_body_exited"]

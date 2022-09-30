@@ -1,0 +1,67 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera03.png" type="Texture" id=1]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera10.png" type="Texture" id=2]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera05.png" type="Texture" id=3]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera07.png" type="Texture" id=4]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera02.png" type="Texture" id=5]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera01.png" type="Texture" id=6]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera04.png" type="Texture" id=7]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera00.png" type="Texture" id=8]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera08.png" type="Texture" id=9]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera09.png" type="Texture" id=10]
+[ext_resource path="res://npc/sprites/onodera_idle/sprite_onodera06.png" type="Texture" id=11]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://npc/onodera.gd" type="Script" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 8 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 54.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 7
+font_data = ExtResource( 12 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 45.5, 37.75 )
+
+[node name="onodera" type="Node2D"]
+
+[node name="onodera" type="KinematicBody2D" parent="."]
+script = ExtResource( 13 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="onodera"]
+frames = SubResource( 1 )
+animation = "idle"
+frame = 6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="onodera"]
+position = Vector2( 3, 3 )
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="onodera"]
+margin_left = -39.0
+margin_top = -58.0
+margin_right = 48.0
+margin_bottom = -37.0
+custom_fonts/font = SubResource( 3 )
+text = "SERCH ONODERA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="onodera"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="onodera/Area2D"]
+position = Vector2( 3, 5.25 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="onodera/Area2D" to="onodera" method="_on_Area2D_body_entered"]

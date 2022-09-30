@@ -1,0 +1,122 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://npc/sprites/girls_casual_clothes_2___sprite_mv_by_karmenis_de0ijyk.png" type="Texture" id=1]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://npc/KinematicBody2D.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 144, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 240, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 144, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ) ],
+"loop": true,
+"name": "move_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 5 ) ],
+"loop": true,
+"name": "move_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=10]
+size = 7
+font_data = ExtResource( 2 )
+
+[sub_resource type="CapsuleShape2D" id=11]
+height = 46.0
+
+[sub_resource type="CircleShape2D" id=12]
+
+[node name="npc_Anna" type="Node2D"]
+
+[node name="npc_Anna" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="npc_Anna"]
+frames = SubResource( 9 )
+animation = "idle_down"
+playing = true
+
+[node name="up_detection" type="RayCast2D" parent="npc_Anna"]
+position = Vector2( -1, 0 )
+enabled = true
+cast_to = Vector2( 0, -80 )
+
+[node name="down_detection" type="RayCast2D" parent="npc_Anna"]
+enabled = true
+cast_to = Vector2( 0, 80 )
+
+[node name="Label" type="Label" parent="npc_Anna"]
+margin_left = -14.0
+margin_top = -36.0
+margin_right = 17.0
+margin_bottom = -15.0
+custom_fonts/font = SubResource( 10 )
+text = "15pts"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="npc_Anna"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_Anna/Area2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_Anna"]
+position = Vector2( 0, 15 )
+shape = SubResource( 12 )
+
+[connection signal="body_entered" from="npc_Anna/Area2D" to="npc_Anna" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="npc_Anna/Area2D" to="npc_Anna" method="_on_Area2D_body_exited"]

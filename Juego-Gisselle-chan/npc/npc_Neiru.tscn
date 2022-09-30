@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://npc/sprites/girls_casual_clothes_2___sprite_mv_by_karmenis_de0ijyk.png" type="Texture" id=1]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://npc/npc_Neiru.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 21.0
+height = 6.0
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 240, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 3 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=7]
+size = 7
+font_data = ExtResource( 2 )
+
+[sub_resource type="CircleShape2D" id=8]
+
+[node name="npc_Neiru" type="Node2D"]
+
+[node name="npc_Neiru" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="npc_Neiru"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_Neiru/Area2D"]
+position = Vector2( -6, 1 )
+shape = SubResource( 6 )
+
+[node name="right_detection" type="RayCast2D" parent="npc_Neiru"]
+enabled = true
+cast_to = Vector2( 90, 0 )
+
+[node name="left_detection" type="RayCast2D" parent="npc_Neiru"]
+enabled = true
+cast_to = Vector2( -90, 0 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="npc_Neiru"]
+frames = SubResource( 5 )
+animation = "idle"
+playing = true
+
+[node name="Label" type="Label" parent="npc_Neiru"]
+margin_left = -17.0
+margin_top = -39.0
+margin_right = 18.0
+margin_bottom = 6.0
+custom_fonts/font = SubResource( 7 )
+text = "50pts
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_Neiru"]
+position = Vector2( -1, 15 )
+shape = SubResource( 8 )
+
+[connection signal="body_entered" from="npc_Neiru/Area2D" to="npc_Neiru" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="npc_Neiru/Area2D" to="npc_Neiru" method="_on_Area2D_body_exited"]

@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://npc/sprites/ballerinas_01___sprite_mv_by_karmenis_dcpv7yr.png" type="Texture" id=1]
+[ext_resource path="res://npc/npc_rose.gd" type="Script" id=2]
+[ext_resource path="res://Assets/fuentes/Pixeled.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 336, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 336, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ) ],
+"loop": true,
+"name": "move_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 5 ) ],
+"loop": true,
+"name": "move_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=10]
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 16.0
+height = 68.0
+
+[sub_resource type="DynamicFont" id=12]
+size = 7
+font_data = ExtResource( 3 )
+
+[node name="npc_rose" type="Node2D"]
+
+[node name="npc_rose" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="npc_rose"]
+frames = SubResource( 9 )
+animation = "idle_up"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_rose"]
+position = Vector2( 0, 14 )
+shape = SubResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="npc_rose"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc_rose/Area2D"]
+shape = SubResource( 11 )
+
+[node name="up_col" type="RayCast2D" parent="npc_rose"]
+enabled = true
+cast_to = Vector2( 0, 100 )
+
+[node name="down_col" type="RayCast2D" parent="npc_rose"]
+enabled = true
+cast_to = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="npc_rose"]
+margin_left = -17.0
+margin_top = -35.0
+margin_right = 23.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 12 )
+text = "40pts"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="npc_rose/Area2D" to="npc_rose" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="npc_rose/Area2D" to="npc_rose" method="_on_Area2D_body_exited"]
