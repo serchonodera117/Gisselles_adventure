@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Mapa.gd" type="Script" id=1]
+[ext_resource path="res://Assets/mapas/mapa_observable.png" type="Texture" id=2]
+[ext_resource path="res://Assets/boton_cerrar.png" type="Texture" id=3]
+[ext_resource path="res://Assets/rosa_vientos.png" type="Texture" id=4]
+[ext_resource path="res://objetivos/target_kayolica.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/boton_dialogo.png" type="Texture" id=6]
+[ext_resource path="res://Assets/targets/casa_kayolica.png" type="Texture" id=7]
+[ext_resource path="res://Assets/boton_cerra_hover.png" type="Texture" id=8]
+
+[node name="Mapa" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fondo" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.34902 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mapa" type="TextureRect" parent="."]
+margin_left = 191.0
+margin_top = 59.0
+margin_right = 815.0
+margin_bottom = 525.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="indicadores" type="Control" parent="."]
+margin_left = 191.0
+margin_top = 59.0
+margin_right = 815.0
+margin_bottom = 525.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ciudad" type="Control" parent="indicadores"]
+margin_right = 624.0
+margin_bottom = 466.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gisselle_house" type="Sprite" parent="indicadores/ciudad"]
+visible = false
+position = Vector2( 77.178, 49 )
+scale = Vector2( 0.426352, 0.699442 )
+texture = ExtResource( 6 )
+
+[node name="preparatoria" type="Sprite" parent="indicadores/ciudad"]
+visible = false
+position = Vector2( 547.293, 73 )
+scale = Vector2( 0.481713, 0.699442 )
+texture = ExtResource( 6 )
+
+[node name="kayolica_home" type="Sprite" parent="indicadores/ciudad"]
+visible = false
+position = Vector2( 291, 41 )
+scale = Vector2( 0.0772059, 0.0771955 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="indicadores/ciudad/kayolica_home"]
+position = Vector2( 272.855, 227.633 )
+rotation = -1.09956
+scale = Vector2( 5.4301, 11.0069 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="indicadores/ciudad/kayolica_home"]
+margin_left = -298.0
+margin_top = 181.0
+margin_right = -194.0
+margin_bottom = 207.0
+rect_scale = Vector2( 5, 5 )
+custom_colors/font_color = Color( 0.470588, 0.0823529, 0.0823529, 1 )
+text = "Casa de kayolica"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="escuela" type="Control" parent="indicadores"]
+margin_right = 624.0
+margin_bottom = 466.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="target_kayolica" parent="indicadores/escuela" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 24, 24 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="rosa_vientos" type="Sprite" parent="."]
+position = Vector2( 136, 525 )
+scale = Vector2( 2.68, 2.66 )
+texture = ExtResource( 4 )
+
+[node name="cerrar" type="TextureButton" parent="."]
+margin_left = 769.0
+margin_top = 34.0
+margin_right = 853.0
+margin_bottom = 94.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="cerrar" to="." method="_on_TextureButton_pressed"]

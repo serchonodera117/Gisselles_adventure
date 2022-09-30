@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/2 Background/Night/1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/2 Background/Night/3.png" type="Texture" id=2]
+[ext_resource path="res://Assets/flecha_volver.png" type="Texture" id=3]
+[ext_resource path="res://Menu/TextureButton.gd" type="Script" id=4]
+
+[node name="Creditos" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0.309804, 0.309804, 0.309804, 1 )
+margin_right = 1023.0
+margin_bottom = 597.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_right = 1023.0
+margin_bottom = 597.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_right = 145.0
+margin_bottom = 107.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
+expand = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="TextEdit" parent="."]
+margin_left = 185.0
+margin_top = 107.0
+margin_right = 841.0
+margin_bottom = 486.0
+text = "Desarrollo-------------------------------------------------
+ - Codificación/construcción: Sergio García Michel
+ - Diseño de protagonistas (Gisselle-kayolica): Sergio García michel 
+
+sprites consultados-------------------------------------
+- NPC: Kaermenis, Devianart & Bombone Studios
+- Edificios: consultados de Pokemon 
+- tilesets de laCasa de gisselle: ~Natsu kuro, pinterest
+- Edificios destruidos: ~Poison master, Devianart. 
+- Casas con techo piramidal: ~Phyromatica, Devianart
+- Casa de las protagonistas: ~Forêt Éternelle, Tweeter
+- Puentes y suelo:  ~Forêt Éternelle, Tweeter
+- Tilesets escuela: ~Ariel Carbin, Pinterest.
+- Tilesets escuela (2):  ~Alilali, Devianart.
+
+Música- consultada-----------------------------------------------------
+- Main menu: rei2 8bit cover ~Axel de grey, Youtube
+- Casa de gissele: 8bit cover resistence camp ~Boxic Funk, youtube
+- Ciudad: 8bit cover soong of ancients ~Studio Supernebula, Youtube.
+- Nivel 1: 8bit cover Amend ~j^p^n
+- Game over:8bit cover  Nathan larson Aviva pastoral.
+- Intro escuela: just monika doki doki ~team salvato
+- cinematica de escuela: where is my cookie ~Oneul
+- Mapa de escuela:  8bit buttercup cover, ~mooph, youtube
+
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_TextureButton_pressed"]
