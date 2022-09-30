@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/mapa_casa_interiores/Marco_espejo.png" type="Texture" id=1]
+[ext_resource path="res://Assets/mapa_casa_interiores/bathroom_1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/flecha_volver.png" type="Texture" id=3]
+[ext_resource path="res://Mapa_Casa_Gisselle/bathroom_1.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Gisselle_Braun_von_Degurechaff.png" type="Texture" id=5]
+[ext_resource path="res://juego/caja_dialogos.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/flecha_volver_hover.png" type="Texture" id=7]
+
+[sub_resource type="TileSet" id=1]
+0/name = "bathroom_1.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 749, 282, 110, 113 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="bathroom_1" type="Node2D"]
+position = Vector2( 176, 114 )
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -172.0
+margin_top = -113.0
+margin_right = 883.0
+margin_bottom = 617.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gisselle" type="Sprite" parent="."]
+position = Vector2( 368, 455 )
+scale = Vector2( 0.604625, 0.599059 )
+texture = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+format = 1
+tile_data = PoolIntArray( -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -65539, 0, 0, -65538, 0, 0, -131060, 0, 0, -131059, 0, 0, -3, 0, 0, -2, 0, 0, -65524, 0, 0, -65523, 0, 0, 65533, 0, 0, 65534, 0, 0, 12, 0, 0, 13, 0, 0, 131069, 0, 0, 131070, 0, 0, 65548, 0, 0, 65549, 0, 0, 196605, 0, 0, 196606, 0, 0, 131084, 0, 0, 131085, 0, 0, 262141, 0, 0, 262142, 0, 0, 196620, 0, 0, 196621, 0, 0, 327677, 0, 0, 327678, 0, 0, 262156, 0, 0, 262157, 0, 0, 393213, 0, 0, 393214, 0, 0, 327692, 0, 0, 327693, 0, 0, 458749, 0, 0, 458750, 0, 0, 393228, 0, 0, 393229, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 589821, 0, 0, 589822, 0, 0, 589823, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 342, 173 )
+scale = Vector2( 5.34337, 2.20624 )
+texture = ExtResource( 1 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = -153.0
+margin_top = -81.0
+margin_right = -19.0
+margin_bottom = -5.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="caja_dialogos" parent="." instance=ExtResource( 6 )]
+modulate = Color( 1, 1, 1, 0.843137 )
+margin_left = 357.0
+margin_top = 455.0
+margin_right = 357.0
+margin_bottom = 455.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
