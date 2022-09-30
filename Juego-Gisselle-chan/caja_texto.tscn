@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/dialog_text.png" type="Texture" id=1]
+
+[node name="caja_texto" type="Node2D"]
+
+[node name="caja_texto" type="Sprite" parent="."]
+position = Vector2( -1.52588e-05, 0 )
+scale = Vector2( 0.988487, 0.667969 )
+texture = ExtResource( 1 )

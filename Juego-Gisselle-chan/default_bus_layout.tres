@@ -1,0 +1,39 @@
+[gd_resource type="AudioBusLayout" load_steps=8 format=2]
+
+[sub_resource type="AudioEffectStereoEnhance" id=1]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectReverb" id=3]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectLowPassFilter" id=10]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectDelay" id=17]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectBandPassFilter" id=19]
+resource_name = "BandPassFilter"
+
+[sub_resource type="AudioEffectPitchShift" id=20]
+resource_name = "PitchShift"
+
+[sub_resource type="AudioEffectPhaser" id=21]
+resource_name = "Phaser"
+
+[resource]
+bus/0/volume_db = -1.12373
+bus/0/effect/0/effect = SubResource( 1 )
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource( 3 )
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource( 10 )
+bus/0/effect/2/enabled = false
+bus/0/effect/3/effect = SubResource( 17 )
+bus/0/effect/3/enabled = false
+bus/0/effect/4/effect = SubResource( 19 )
+bus/0/effect/4/enabled = false
+bus/0/effect/5/effect = SubResource( 20 )
+bus/0/effect/5/enabled = false
+bus/0/effect/6/effect = SubResource( 21 )
+bus/0/effect/6/enabled = false
