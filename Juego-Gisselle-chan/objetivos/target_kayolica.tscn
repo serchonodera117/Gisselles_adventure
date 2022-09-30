@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica5.png" type="Texture" id=1]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica6.png" type="Texture" id=4]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica0.png" type="Texture" id=5]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/targets/target_kayolica/target_kayolica4.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "k_target",
+"speed": 5.0
+} ]
+
+[node name="target_kayolica" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "k_target"
+frame = 1
+playing = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = -33.0
+margin_top = -58.0
+margin_right = 31.0
+margin_bottom = -27.0
+text = "KAYOLICA
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
